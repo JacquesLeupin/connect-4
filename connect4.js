@@ -10,7 +10,7 @@ var HEIGHT = 6;
 
 var currPlayer = 1; // active player: 1 or 2
 var board; // array of rows, each row is array of cells  (board[y][x])
-
+var entireBoard=0;
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -72,6 +72,7 @@ function placeInTable(y, x) {
   newPiece.setAttribute("class","piece");
   newPiece.classList.add(`p${currPlayer}`);
   document.getElementById(`${y}-${x}`).appendChild(newPiece);
+  entireBoard++;
 }
 
 /** endGame: announce game end */
@@ -148,11 +149,7 @@ function checkForWin() {
 }
 
 function entireBoardFilled() {//function to check if board is filled
-  board.every(function(col) {
-    return col.every(function(cell) {
-      return cell === 1 || cell === 2;
-    });
-  });
+  return entireBoard === WIDTH*HEIGHT;
 }
 
 makeBoard();
