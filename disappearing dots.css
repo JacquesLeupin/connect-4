@@ -17,13 +17,6 @@ td {
 }
 
 
-.p1 {
-  background: gold;
-}
-
-.p2 {
-  background: silver;
-}
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
 
 /* column-top is table row of clickable areas for each column */
@@ -40,12 +33,6 @@ td {
   100% {
     background: black;
   }
-  from {
-    transform: translate3d(0, -50vh, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
 }
 
 .p2 {
@@ -59,12 +46,4 @@ td {
   100% {
     background: black;
   }
-  from {
-    transform: translate3d(0, -50vh, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
 }
-
-
