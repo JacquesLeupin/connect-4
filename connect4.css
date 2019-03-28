@@ -16,18 +16,34 @@ td {
   border-radius:50%;
 }
 
-.p1 {
-  background-color: red;
-}
-
-.p2 {
-  background-color: blue;
-}
-
-
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
 
 /* column-top is table row of clickable areas for each column */
 
 /* TODO: make column-top row lighter and provide hover effect */
+.p1 {
+  animation: color-me-red 100s;
+}
+
+@keyframes color-me-red {
+  0% {
+    background: red;
+  }
+  100% {
+    background: black;
+  }
+}
+
+.p2 {
+  animation: color-me-blue 100s;
+}
+
+@keyframes color-me-blue {
+  0% {
+    background: blue;
+  }
+  100% {
+    background: black;
+  }
+}

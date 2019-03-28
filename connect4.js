@@ -9,7 +9,7 @@ var WIDTH = 7;
 var HEIGHT = 6;
 
 var currPlayer = 1; // active player: 1 or 2
-var board; // array of rows, each row is array of cells  (board[y][x])
+var board=[]; // array of rows, each row is array of cells  (board[y][x])
 var entireBoard=0;
 
 /** makeBoard: create in-JS board structure:
@@ -17,9 +17,17 @@ var entireBoard=0;
  */
 
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
-  let filler = null
-  board = [...Array(WIDTH)].map(e => Array(HEIGHT).fill(filler));
+  // // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  // let filler = null
+  // board = [...Array(WIDTH)].map(e => Array(HEIGHT).fill(filler));
+  let empty = null;
+  for (let i=0; i<WIDTH; i++) {
+    new_row = []
+    for (let j=0; j<HEIGHT; j++) {
+      new_row.push(empty);
+    }
+    board.push(new_row);
+  }
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
@@ -68,6 +76,7 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   board[x][y] = currPlayer;
+  console.log(board[x][y]);
   var newPiece = document.createElement("div");
   newPiece.setAttribute("class","piece");
   newPiece.classList.add(`p${currPlayer}`);
@@ -125,21 +134,21 @@ function checkForWin() {
     return cells.every(
         ([y, x]) =>
             y >= 0 &&
-            y < HEIGHT &&
+            y < WIDTH &&
             x >= 0 &&
-            x < WIDTH &&
+            x < HEIGHT &&
             board[y][x] === currPlayer
     );
   }
 
   // TODO: read and understand this code. Add comments to help you.
 
-  for (var y = 0; y < HEIGHT; y++) {
-    for (var x = 0; x < WIDTH; x++) {
-      var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-      var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-      var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+  for (var y = 0; y < WIDTH; y++) {
+    for (var x = 0; x < HEIGHT; x++) {
+      var vert = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
+      var horiz = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
+      var diagDL = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
+      var diagDR = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
