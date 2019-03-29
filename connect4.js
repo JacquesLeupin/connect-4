@@ -5,12 +5,12 @@
  * board fills (tie)
  */
 
-var WIDTH = 7;
-var HEIGHT = 6;
+const WIDTH = 7;
+const HEIGHT = 6;
 
-var currPlayer = 1; // active player: 1 or 2
-var board=[]; // array of rows, each row is array of cells  (board[y][x])
-var entireBoard=0;
+let currPlayer = 1; // active player: 1 or 2
+let board=[]; // array of rows, each row is array of cells  (board[y][x])
+let entireBoard=0;
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -18,39 +18,39 @@ var entireBoard=0;
 
 function makeBoard() {
   // // TODO: set "board" to empty HEIGHT x WIDTH matrix array
-  // let filler = null
-  // board = [...Array(WIDTH)].map(e => Array(HEIGHT).fill(filler));
-  let empty = null;
-  for (let i=0; i<WIDTH; i++) {
-    new_row = []
-    for (let j=0; j<HEIGHT; j++) {
-      new_row.push(empty);
-    }
-    board.push(new_row);
-  }
+  let filler = null
+  board = [...Array(WIDTH)].map(e => Array(HEIGHT).fill(filler));
+  // let empty = null;
+  // for (let i=0; i<WIDTH; i++) {
+  //   new_row = []
+  //   for (let j=0; j<HEIGHT; j++) {
+  //     new_row.push(empty);
+  //   }
+  //   board.push(new_row);
+  // }
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
   // TODO: get "board" variable from the item in HTML w/ID of "board"
-  var board = document.getElementById("board");
+  let board = document.getElementById("board");
   // TODO: add comment for this code
-  var top = document.createElement("tr"); //this creates an HTML clickable top-row of the board
+  let top = document.createElement("tr"); //this creates an HTML clickable top-row of the board
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
-  for (var x = 0; x < WIDTH; x++) { //creates an HTML clickable cell for the top row
-    var headCell = document.createElement("td");
+  for (let x = 0; x < WIDTH; x++) { //creates an HTML clickable cell for the top row
+    let headCell = document.createElement("td");
     headCell.setAttribute("id", x);
     top.append(headCell);
   }
   board.append(top);
 
   // TODO: add comment for this code
-  for (var y = 0; y < HEIGHT; y++) {//creates table for game pieces
+  for (let y = 0; y < HEIGHT; y++) {//creates table for game pieces
     const row = document.createElement("tr");
-    for (var x = 0; x < WIDTH; x++) {
+    for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
       cell.setAttribute("id", `${y}-${x}`); //gives each table cell a unique identifier.
       row.append(cell);
@@ -76,7 +76,7 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   board[x][y] = currPlayer;
-  var newPiece = document.createElement("div");
+  let newPiece = document.createElement("div");
   newPiece.setAttribute("class","piece");
   newPiece.classList.add(`p${currPlayer}`);
   document.getElementById(`${y}-${x}`).appendChild(newPiece);
@@ -94,10 +94,10 @@ function endGame(msg) {
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  let x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  let y = findSpotForCol(x);
   if (y === null) {
     return;
   }
@@ -142,12 +142,12 @@ function checkForWin() {
 
   // TODO: read and understand this code. Add comments to help you.
 
-  for (var y = 0; y < WIDTH; y++) {
-    for (var x = 0; x < HEIGHT; x++) {
-      var vert = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      var horiz = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-      var diagDL = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-      var diagDR = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+  for (let y = 0; y < WIDTH; y++) {
+    for (let x = 0; x < HEIGHT; x++) {
+      let vert = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
+      let horiz = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
+      let diagDL = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
+      let diagDR = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
